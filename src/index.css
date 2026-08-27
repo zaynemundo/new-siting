@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #0D0E11;
+    --bg-secondary: #16181D;
+    --bg-tertiary: #1E2128;
+    --border-color: #262932;
+    --text-primary: #FAF8F5;
+    --text-secondary: #9DA3AF;
+    --text-muted: #64748B;
+    --accent-color: #CCFF00;
+    --accent-hover: #B3E600;
+    --accent-contrast: #000000;
+    --card-surface: #14161C;
+    --badge-bg: rgba(204, 255, 0, 0.1);
+    --badge-text: #CCFF00;
+  }
+
+  .theme-light {
+    --bg-primary: #F7F5F0;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #EBE7DF;
+    --border-color: #D6D0C4;
+    --text-primary: #121316;
+    --text-secondary: #525866;
+    --text-muted: #868E96;
+    --accent-color: #FF4800;
+    --accent-hover: #E03E00;
+    --accent-contrast: #FFFFFF;
+    --card-surface: #FFFFFF;
+    --badge-bg: rgba(255, 72, 0, 0.08);
+    --badge-text: #FF4800;
+  }
+
+  .theme-acid {
+    --bg-primary: #050505;
+    --bg-secondary: #111111;
+    --bg-tertiary: #1A1A1A;
+    --border-color: #CCFF00;
+    --text-primary: #CCFF00;
+    --text-secondary: #D4FFA6;
+    --text-muted: #7E9E3C;
+    --accent-color: #CCFF00;
+    --accent-hover: #FFFFFF;
+    --accent-contrast: #000000;
+    --card-surface: #0E0E0E;
+    --badge-bg: #CCFF00;
+    --badge-text: #000000;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+  }
+}
+
+/* Tactile Grain Noise Overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  opacity: 0.035;
+  z-index: 999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* Swiss Grid Lines */
+.grid-bg {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+.theme-light .grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+.theme-acid .grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(204, 255, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(204, 255, 0, 0.08) 1px, transparent 1px);
+}
+
+/* Editorial typography text clip / stroke */
+.text-outline {
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+}
+
+.text-outline-thin {
+  -webkit-text-stroke: 1px currentColor;
+  color: transparent;
+}
+
+/* Glitch animation */
+@keyframes glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
+}
+
+.hover-glitch:hover {
+  animation: glitch 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Smooth custom cursor styles */
+.cursor-blob {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              height 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.2s ease,
+              background-color 0.2s ease;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(22, 24, 29, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+}
+
+.theme-light .glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border-color);
+}
+
+/* Print stamp badge effect */
+.stamp-border {
+  border: 2px dashed currentColor;
+  padding: 4px 8px;
+}
